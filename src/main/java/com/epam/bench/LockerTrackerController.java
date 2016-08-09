@@ -68,7 +68,7 @@ public class LockerTrackerController {
 
 			// form input is ok
 			logger.info("result:{}",result);
-			lockerService.reservLocker(queryParams.getName(), queryParams.getId(), queryParams.getPasswd());
+			lockerService.reserveLocker(queryParams.getName(), queryParams.getId(), queryParams.getPasswd());
 			Map<Integer, Locker> lockers = lockerService.getLockers();
 
 			model.addAttribute("lockers", lockers);

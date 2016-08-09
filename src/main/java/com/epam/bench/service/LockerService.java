@@ -20,17 +20,21 @@ public class LockerService {
 		this.lockerDaoImpl = lockerDaoImpl;
 	}
 
-	public void reservLocker(String userName, int lockerId, String pass) {
-		if (!StringUtil.isEmpty(userName) && !StringUtil.isEmpty(pass) && lockerId > -1 && lockerId < 20 && !isUserHasLocker(userName)) {
+	public boolean reserveLocker(String userName, int lockerId, String pass) {
+		if (!isUserHasLocker(userName)) {
 			lockerDaoImpl.reserveLocker(new User.Builder().withName(userName).build(), lockerId, pass);
+			return true;
 		}
+		return false;
 		
 	}
 
-	public void freeUpLocker(int lockerId, String pass) {
-		if (lockerId > -1 && lockerId < 20 && !StringUtil.isEmpty(pass)) {
+	public boolean freeUpLocker(int lockerId, String pass) {
+		if (!StringUtil.isEmpty(pass)) {
 			lockerDaoImpl.freeUpLocker(lockerId, pass);
+			return true;
 		}
+		return false;
 	}
 
 	public Map<Integer, Locker> getLockers() {

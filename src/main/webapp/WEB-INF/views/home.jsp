@@ -43,7 +43,9 @@
 					<td><form:errors path="passwd" class="error" /></td>
 				</tr>
 				<tr>
-					<td rowspan="3"><input type="submit" value="Send" /></td>
+					<td><input type="submit" value="Send" /></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</form>
 		</table>
@@ -64,7 +66,9 @@
 							<td><form:errors path="passwd" class="error" /></td>
 						</tr>
 						<tr>
-							<td rowspan="3"><input type="submit" value="Send" /></td>
+							<td><input type="submit" value="Send" /></td>
+							<td></td>
+							<td></td>
 						</tr>
 					</form>
 				</table>

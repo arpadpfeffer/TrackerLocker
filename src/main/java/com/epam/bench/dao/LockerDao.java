@@ -6,7 +6,7 @@ import com.epam.bench.model.Locker;
 import com.epam.bench.model.User;
 
 public interface LockerDao {
-	void freeUpLocker(int lockerId, String pass);
-	void reserveLocker(User user, int lockerId, String pass);
+	boolean freeUpLocker(int lockerId, String pass);
+	boolean reserveLocker(User user, int lockerId, String pass);
 	Map<Integer, Locker> getLockers();
 }
