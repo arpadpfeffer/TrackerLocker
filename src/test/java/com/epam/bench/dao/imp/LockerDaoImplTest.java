@@ -1,4 +1,4 @@
-package com.epam.bench.dao.impTest;
+package com.epam.bench.dao.imp;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -57,7 +57,7 @@ public class LockerDaoImplTest {
 	}
 	
 	@Test
-	public void shouldNotFreeUpAlreadyLockedLocker() {
+	public void shouldFreeUpAlreadyLockedLocker() {
 		// GIVEN
 		User testUser= new User.Builder().withName("test-user").build();
 		given(tempDataBase.getLocker(LOCKER_ID)).willReturn(new Locker.Builder().withUser(testUser).withPass(PASSWORD).build());
@@ -68,11 +68,23 @@ public class LockerDaoImplTest {
 	}
 	
 	@Test
-	public void shouldFreeUpAlreadyLockedLocker() {
+	public void shouldNotFreeUpAlreadyLockedLocker() {
 		// GIVEN
 		given(tempDataBase.getLocker(LOCKER_ID)).willReturn(new Locker.Builder().withUser(null).build());
 		// WHEN
 		boolean actual = lockerDaoImpl.freeUpLocker(LOCKER_ID, PASSWORD);
+		// THEN
+		assertFalse(actual);
+	}
+	
+	@Test
+	public void shouldNotFreeUpAlreadyLockedLockerWithWrongPassword() {
+		// GIVEN
+		User testUser= new User.Builder().withName("test-user").build();
+		String pass = "wrongPassword";
+		given(tempDataBase.getLocker(LOCKER_ID)).willReturn(new Locker.Builder().withUser(testUser).withPass(PASSWORD).build());
+		// WHEN
+		boolean actual = lockerDaoImpl.freeUpLocker(LOCKER_ID, pass);
 		// THEN
 		assertFalse(actual);
 	}

@@ -1,4 +1,4 @@
-package com.epam.benchTest;
+package com.epam.bench;
 
 public class LockerTracketControllerTest {
 

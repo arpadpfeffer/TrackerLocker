@@ -1,4 +1,4 @@
-package com.epam.bench.serviceTest;
+package com.epam.bench.service;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -49,6 +49,18 @@ public class LockerServiceTest {
 		assertTrue(actual);
 	}
 	
+	/*@Test
+	public void shouldNotReserveLockerIfUserDoesHaveAny() {
+		//GIVEN
+		Map<Integer, Locker> lockers = new HashMap<>();
+		lockers.put(LOCKER_ID, new Locker.Builder().withId(LOCKER_ID).withUser(new User.Builder().withName(USER_NAME).build()).build());
+		given(lockerDaoImpl.getLockers()).willReturn(lockers);
+		//WHEN
+		boolean actual = lockerService.reserveLocker(USER_NAME, LOCKER_ID, PASS);
+		//THEN
+		assertFalse(actual);
+	}*/
+	
 	@Test
 	public void shouldNotReserveLockerIfUserDoesHaveAny() {
 		//GIVEN
@@ -72,6 +84,17 @@ public class LockerServiceTest {
 	}
 	
 	@Test
+	public void shouldFreeUpLockerIfPasswordNull() {
+		//GIVEN
+		User testUser = new User.Builder().withName(USER_NAME).build();
+		given(tempDataBase.getLocker(LOCKER_ID)).willReturn(new Locker.Builder().withUser(testUser).withPass(PASS).build());
+		//WHEN
+		boolean actual = lockerService.freeUpLocker(LOCKER_ID, PASS);
+		//THEN
+		assertTrue(actual);
+	}
+	
+	/*@Test
 	public void shouldFreeUpLockerIfUserDoesHaveAny() {
 		//GIVEN
 		User testUser= new User.Builder().withName("test-user").build();
@@ -90,5 +113,7 @@ public class LockerServiceTest {
 		boolean actual = lockerService.freeUpLocker(LOCKER_ID, PASS);
 		//THEN
 		assertTrue(actual);
-	}
+	}*/
+	
+	
 }
